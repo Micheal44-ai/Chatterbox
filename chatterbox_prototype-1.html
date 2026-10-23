@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chatterbox — Retro Chat Rooms</title>
+<style>
+:root{--ink:#21133e;--purple:#5c2b91;--pink:#ff55b7;--cyan:#55f4ff;--lime:#c7ff5e;--paper:#fff8e9;--panel:#fffdf7;--line:#21133e}
+*{box-sizing:border-box}body{margin:0;background-color:#25133c;background-image:radial-gradient(#6b3c91 1px,transparent 1px);background-size:10px 10px;color:var(--ink);font:15px "Courier New",monospace;min-height:100vh}
+a{color:#51218d}.shell{max-width:1180px;margin:22px auto;padding:0 14px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--paper);border:3px solid var(--line);box-shadow:7px 7px 0 #090414;padding:13px 16px}.brand{font-size:clamp(24px,4vw,40px);font-weight:900;letter-spacing:-2px;color:var(--purple);text-shadow:2px 2px var(--pink)}.brand small{display:block;font-size:11px;letter-spacing:2px;text-shadow:none;color:#654b78}.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.btn{font:700 13px "Courier New",monospace;border:2px solid var(--line);background:var(--lime);color:var(--ink);padding:9px 12px;cursor:pointer;box-shadow:3px 3px 0 var(--line)}.btn:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--line)}.btn.pink{background:var(--pink)}.btn.dark{background:var(--purple);color:white}.status{background:#e9ffd3;border:2px solid #345a18;padding:7px 9px;font-size:12px;font-weight:bold}.marquee{margin:14px 0;background:var(--cyan);border:3px solid var(--line);padding:8px;font-weight:bold;overflow:hidden;white-space:nowrap}.layout{display:grid;grid-template-columns:230px minmax(0,1fr) 220px;gap:14px}.panel{border:3px solid var(--line);box-shadow:5px 5px 0 #090414;background:var(--panel);min-width:0}.panel-head{background:var(--purple);color:white;padding:10px 12px;font-weight:bold;border-bottom:3px solid var(--line);display:flex;justify-content:space-between;align-items:center}.side-body{padding:12px}.room{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;padding:9px;margin:4px 0;background:#f4eaff;border:2px solid transparent;font:inherit;cursor:pointer;color:var(--ink)}.room.active{background:#ffe0f3;border-color:var(--pink);font-weight:bold}.room .count{font-size:11px;color:#654b78}.section-label{font-size:11px;color:#715887;font-weight:bold;letter-spacing:1px;margin:12px 0 5px}.user{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed #c8b8d5}.dot{width:10px;height:10px;background:#65cf6a;border:1px solid #204b21;display:inline-block;flex-shrink:0}.dot.away{background:#ffbf47}.tiny{font-size:11px;color:#725b80}.main-chat{display:flex;flex-direction:column;min-height:590px}.chat-title{font-size:18px;font-weight:bold}.topic{font-size:12px;color:#e4d8f4;margin-top:4px}.messages{padding:14px;flex:1;min-height:330px;max-height:480px;overflow:auto;background:repeating-linear-gradient(0deg,#fffdf7,#fffdf7 25px,#fbf5ff 26px)}.message{margin:0 0 14px;line-height:1.45;overflow-wrap:anywhere}.stamp{color:#82698f;font-size:11px}.nick{font-weight:bold;color:#642d9b}.nick.me{color:#bd2381}.msg-text{margin-top:3px}.system{font-size:12px;color:#6b5579;border-left:3px solid var(--cyan);padding:5px 8px;background:#effdff;margin-bottom:12px}.compose{border-top:3px solid var(--line);padding:12px;background:#f5eaff}.compose textarea{width:100%;min-height:68px;resize:vertical;padding:10px;border:2px solid var(--line);font:14px "Courier New",monospace;background:white;color:var(--ink)}.compose-row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}.compose-tools{display:flex;gap:7px;flex-wrap:wrap}.right-card{padding:12px}.badge{display:inline-block;background:var(--pink);padding:4px 6px;border:1px solid var(--line);font-size:11px;font-weight:bold}.pixel-box{background:#fff0a8;border:2px dashed #8e6c18;padding:10px;margin-top:10px;font-size:12px;line-height:1.5}.footer{text-align:center;color:#e9d8ff;font-size:11px;padding:18px 0 10px}.footer a{color:var(--cyan)}.online-number{font-size:27px;font-weight:bold;color:var(--purple)}.preview{max-width:180px;max-height:130px;display:block;margin-top:7px;border:2px solid var(--line)}.modal-backdrop{position:fixed;inset:0;background:#130821cc;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal{width:min(420px,100%);background:var(--paper);border:4px solid var(--line);box-shadow:8px 8px 0 #000;padding:18px}.modal h2{margin-top:0;color:var(--purple)}.modal input{width:100%;padding:10px;border:2px solid var(--line);font:inherit;margin:8px 0 14px}.modal-actions{display:flex;justify-content:flex-end;gap:8px}.notice{font-size:11px;color:#715887;margin-top:8px}.mobile-only{display:none}
+@media(max-width:900px){.layout{grid-template-columns:190px minmax(0,1fr)}.right-panel{grid-column:1/-1}.right-panel .side-body{display:grid;grid-template-columns:1fr 1fr;gap:12px}.main-chat{min-height:540px}}
+@media(max-width:620px){.shell{margin:10px auto;padding:0 9px}.topbar{align-items:flex-start;flex-direction:column}.layout{grid-template-columns:1fr}.room-list{display:grid;grid-template-columns:1fr 1fr;gap:3px}.left-panel .side-body{padding:9px}.left-panel .users-list{display:none}.right-panel{grid-column:auto}.right-panel .side-body{display:block}.main-chat{min-height:520px}.messages{max-height:none}.marquee{font-size:12px}.status{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">✦ CHATTERBOX ✦<small>THE INTERNET'S COZIEST CORNER // EST. 1999-ish</small></div>
+    <div class="top-actions"><span class="status" id="loginStatus">GUEST_42 online</span><button class="btn pink" id="accountBtn">Choose nickname</button></div>
+  </header>
+  <div class="marquee">★ WELCOME TO CHATTERBOX ★ Be kind, make friends, and keep the good vibes loading... ★ <span id="marqueeOnline">128</span> users hanging out today ★</div>
+  <div class="layout">
+    <aside class="panel left-panel">
+      <div class="panel-head">▸ CHAT ROOMS <span>✧</span></div>
+      <div class="side-body">
+        <div class="section-label">PICK YOUR CORNER</div>
+        <div class="room-list" id="roomList">
+          <button class="room active" data-room="lobby"><span># the-lobby</span><span class="count">42</span></button>
+          <button class="room" data-room="music"><span># music-zone</span><span class="count">18</span></button>
+          <button class="room" data-room="games"><span># game-arcade</span><span class="count">26</span></button>
+          <button class="room" data-room="art"><span># art-corner</span><span class="count">11</span></button>
+          <button class="room" data-room="late"><span># late-night</span><span class="count">31</span></button>
+        </div>
+        <div class="section-label users-list">HANGING OUT NOW</div>
+        <div class="users-list">
+          <div class="user"><span class="dot"></span><span>PixelPanda <span class="tiny">· typing...</span></span></div>
+          <div class="user"><span class="dot"></span><span>starry_skies</span></div>
+          <div class="user"><span class="dot away"></span><span>dialup_dream</span></div>
+          <div class="user"><span class="dot"></span><span>Mod_Moon <span class="badge">MOD</span></span></div>
+        </div>
+      </div>
+    </aside>
+    <main class="panel main-chat">
+      <div class="panel-head"><div><div class="chat-title" id="roomTitle"># the-lobby</div><div class="topic" id="roomTopic">Introductions, random thoughts, and friendly hellos.</div></div><span>◉ LIVE*</span></div>
+      <div class="messages" id="messages" aria-live="polite">
+        <div class="system">[system] Welcome to Chatterbox! Keep it friendly and don't share private info.</div>
+        <div class="message"><div><span class="stamp">08:41</span> <span class="nick">PixelPanda</span></div><div class="msg-text">heyyy everyone!! ✨ anyone else remember making glittery profile pages?</div></div>
+        <div class="message"><div><span class="stamp">08:42</span> <span class="nick">starry_skies</span></div><div class="msg-text">YES omg the animated star backgrounds were everything 🌟</div></div>
+        <div class="message"><div><span class="stamp">08:43</span> <span class="nick">dialup_dream</span></div><div class="msg-text">*dial-up modem noises* welcome to my corner of the web 📟</div></div>
+        <div class="message"><div><span class="stamp">08:44</span> <span class="nick">Mod_Moon</span></div><div class="msg-text">Friendly reminder: be kind, respect boundaries, and report anything sketchy.</div></div>
+      </div>
+      <form class="compose" id="chatForm">
+        <textarea id="messageInput" placeholder="Type a message... (Enter to send, Shift+Enter for a new line)" maxlength="1000" aria-label="Message"></textarea>
+        <div class="compose-row"><div class="compose-tools"><button type="button" class="btn" id="imageBtn">▧ Image</button><input type="file" id="imageInput" accept="image/*" hidden><button type="button" class="btn" id="voiceBtn">♫ Voice</button><button type="button" class="btn" id="reportBtn">⚑ Report</button></div><button class="btn pink" type="submit">SEND ➜</button></div>
+        <div class="notice">*Prototype preview: messages currently stay in this browser only.</div>
+      </form>
+    </main>
+    <aside class="panel right-panel">
+      <div class="panel-head">▸ YOUR SPACE</div>
+      <div class="side-body">
+        <div class="right-card"><div class="section-label">COMMUNITY PULSE</div><div class="online-number">128 <span style="font-size:12px">online*</span></div><div class="tiny">People around the pixelated world</div><div style="margin-top:10px"><span class="badge">RETRO WEB</span> <span class="badge" style="background:var(--lime)">FRIENDLY</span></div></div>
+        <div class="right-card"><div class="section-label">ROOM RULES</div><ol style="padding-left:18px;line-height:1.7;font-size:12px;margin-top:5px"><li>Be kind.</li><li>No spam or harassment.</li><li>Protect your personal info.</li><li>Report problems to mods.</li></ol></div>
+        <div class="right-card"><div class="section-label">MOD TOOLS</div><button class="btn" id="modBtn" style="width:100%">Open mod panel</button><div class="notice">Demo controls only; no reports are sent to a server.</div></div>
+        <div class="right-card"><div class="section-label">UNDER CONSTRUCTION</div><div class="pixel-box">🚧 Voice chat, accounts, uploads, and moderation need a server before launch.</div></div>
+      </div>
+    </aside>
+  </div>
+  <footer class="footer">Made with ♥ and a suspicious amount of pixel dust · Chatterbox prototype · <a href="#" id="aboutLink">About this demo</a></footer>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><h2 id="modalTitle">Choose your nickname</h2><p id="modalText">Make yourself at home on Chatterbox.</p><input id="nicknameInput" maxlength="24" placeholder="e.g. cosmic_cactus"><div class="modal-actions"><button class="btn" id="cancelModal">Cancel</button><button class="btn pink" id="saveNickname">Let's go!</button></div><div class="notice">Demo only: this nickname is saved in this page session, not a real account.</div></div>
+</div>
+<script>
+const roomInfo={
+ lobby:{title:'# the-lobby',topic:'Introductions, random thoughts, and friendly hellos.',messages:[['PixelPanda','heyyy everyone!! ✨ anyone else remember making glittery profile pages?'],['starry_skies','YES omg the animated star backgrounds were everything 🌟'],['dialup_dream','*dial-up modem noises* welcome to my corner of the web 📟']]},
+ music:{title:'# music-zone',topic:'Share your current earworm and trade mixtape energy.',messages:[['cassettekid','making a playlist for a rainy day 🎧'],['PixelPanda','dream pop + old game soundtracks = perfect combo'],['starry_skies','what song feels like floating through space?']]},
+ games:{title:'# game-arcade',topic:'Co-op quests, high scores, and friendly game talk.',messages:[['8bitwizard','anyone up for a co-op quest later?'],['joystick_jules','retro platformers forever 🎮'],['Mod_Moon','friendly competition only, folks!']]},
+ art:{title:'# art-corner',topic:'Sketches, pixel art, creative experiments, and WIPs.',messages:[['mossybrush','working on a tiny pixel garden 🌱'],['starry_skies','tiny art is powerful art'],['PixelPanda','we should do a weekly doodle prompt!']]},
+ late:{title:'# late-night',topic:'Quiet hours, soft thoughts, and low-volume vibes.',messages:[['moonmilk','the moon looks unreal tonight 🌙'],['dialup_dream','late night internet has its own kind of magic'],['Mod_Moon','remember to hydrate and get some rest too']]}}
+let nickname='GUEST_42', currentRoom='lobby';
+const messages=document.getElementById('messages'), input=document.getElementById('messageInput');
+function addMessage(name,text,own=false,stamp=null){const item=document.createElement('div');item.className='message';const head=document.createElement('div');const time=document.createElement('span');time.className='stamp';time.textContent=stamp||new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});const nick=document.createElement('span');nick.className='nick'+(own?' me':'');nick.textContent=name;head.append(time,document.createTextNode(' '),nick);const body=document.createElement('div');body.className='msg-text';body.textContent=text;item.append(head,body);messages.appendChild(item);messages.scrollTop=messages.scrollHeight}
+function addSystem(text){const el=document.createElement('div');el.className='system';el.textContent='[system] '+text;messages.appendChild(el);messages.scrollTop=messages.scrollHeight}
+function loadRoom(room){currentRoom=room;document.querySelectorAll('.room').forEach(b=>b.classList.toggle('active',b.dataset.room===room));document.getElementById('roomTitle').textContent=roomInfo[room].title;document.getElementById('roomTopic').textContent=roomInfo[room].topic;messages.innerHTML='';addSystem('You entered '+roomInfo[room].title+'. Be kind and have fun!');roomInfo[room].messages.forEach((m,i)=>addMessage(m[0],m[1],false,`08:${45+i}`));}
+document.querySelectorAll('.room').forEach(b=>b.addEventListener('click',()=>loadRoom(b.dataset.room)));
+document.getElementById('chatForm').addEventListener('submit',e=>{e.preventDefault();const value=input.value.trim();if(!value)return;addMessage(nickname,value,true);input.value='';});
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('chatForm').requestSubmit()}});
+const backdrop=document.getElementById('modalBackdrop'), nickInput=document.getElementById('nicknameInput');
+function openModal(){nickInput.value=nickname==='GUEST_42'?'':nickname;backdrop.style.display='flex';nickInput.focus()}
+function closeModal(){backdrop.style.display='none'}
+document.getElementById('accountBtn').addEventListener('click',openModal);
+document.getElementById('cancelModal').addEventListener('click',closeModal);
+document.getElementById('saveNickname').addEventListener('click',()=>{const v=nickInput.value.trim().replace(/\s+/g,'_').replace(/[<>]/g,'').slice(0,24);if(!v){nickInput.focus();return}nickname=v;document.getElementById('loginStatus').textContent=nickname+' online';document.getElementById('accountBtn').textContent='Edit nickname';closeModal();addSystem(nickname+' joined the room.')});
+backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal()});
+document.getElementById('imageBtn').addEventListener('click',()=>document.getElementById('imageInput').click());
+document.getElementById('imageInput').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;if(file.size>5*1024*1024){alert('Please choose an image smaller than 5 MB.');e.target.value='';return}if(!file.type.startsWith('image/')){alert('Please choose an image file.');return}const url=URL.createObjectURL(file);const item=document.createElement('div');item.className='message';const head=document.createElement('div');head.innerHTML='<span class="stamp">now</span> ';const n=document.createElement('span');n.className='nick me';n.textContent=nickname;head.appendChild(n);const label=document.createElement('div');label.className='msg-text';label.textContent='shared an image: '+file.name;const img=document.createElement('img');img.src=url;img.alt='Image shared in this local demo';img.className='preview';item.append(head,label,img);messages.appendChild(item);messages.scrollTop=messages.scrollHeight;addSystem('Image preview is local to this browser. A real site needs safe upload storage.');e.target.value=''});
+document.getElementById('voiceBtn').addEventListener('click',()=>alert('Voice chat is a planned feature. To make it work between people, Chatterbox needs WebRTC plus a signaling server and moderation controls.'));
+document.getElementById('reportBtn').addEventListener('click',()=>{const reason=prompt('What would you like to report? (demo only)');if(reason&&reason.trim())addSystem('Demo report noted locally. A real report needs to be sent to moderators securely.')});
+document.getElementById('modBtn').addEventListener('click',()=>{const action=prompt('MOD DEMO\\nType: 1 to post a room reminder, 2 to clear this room, or Cancel to close.');if(action==='1')addSystem('Moderator reminder: keep it kind, no spam, and protect your privacy.');else if(action==='2'&&confirm('Clear visible messages in this room?')){messages.innerHTML='';addSystem('Room display cleared locally by demo moderator.')}});
+document.getElementById('aboutLink').addEventListener('click',e=>{e.preventDefault();alert('Chatterbox is a front-end prototype. Messages, nickname, image previews, reports, and mod actions are local demo interactions—not shared with other users.')});
+</script>
+</body>
+</html>
